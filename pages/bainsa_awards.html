@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Matei Gabriel Cosa</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<!-- Header -->
+								<header id="header">
+									<ul class="icons" style="font-size: 1.5em;">
+										<li><a href="https://github.com/MateiCosa" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+										<li><a href="https://www.linkedin.com/in/mateicosa/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="mailto: mateigabriel.cosa@studbocconi.it" class="icon fa-envelope"><span class="label"></span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Research Awards @Bending Spoons</h1>
+									</header>
+
+									<span class="image main"><img src="/images/bending_1.jpeg" alt="" /></span>
+									<p>AI research, cool people, and a Bending Spoons aperitivo - these are just some of the highlights of Bocconi AI & Neuroscience Student Association's last event of the academic year. After months of work on interesting and creative projects, our association's researchers got the chance to present their findings in front of an impressive jury of Bending Spoons AI Researchers and Data Scientists.</p>
+									<p>From applications of AI to crypto currencies and financial statement analysis, to computational neuroscience, the projects were exciting and challenging. My work focused on creating and analysing a <i>Knowledge Graph</i> of English Wikipedia under the guidance of prof. Luca Saglietti. Using a combination of heuristics and state-of-the-art graph neural networks, we were able to investigate the similarity between different pages without accessing their content. Our approach was awarded first place by the jury.</p>
+
+									<hr class="major" />
+
+									<h2>Goal: from Plato to Wikipedia</h2>
+
+									<span class="image right"><img src="/images/bending_5.png" alt="" /></span>
+
+									<p>The project was inspired by the idea of trying to understand the way in which knowledge is formed. What connections can be drawn between different concepts and is there a way to explore the structure of human knowledge? Such a question has puzzled the minds of great thinkers across millenia, with Plato coming up with his <i>world of ideas</i>. This theory is centred around forms which represent the non-physical essences of all things, while humans only have access to the limited perspective of the physical world.</p>
+									<p>We might not be able to grasp Plato's metaphysical collection of knowledge, but we can take a look at the world's largest free encyclopedia: Wikipedia. This platform can be thought of as a database of concepts, events, and personalities which shaped the way we understand the world today. Therefore, if one attempts to study knowledge, Wikipedia appears to be the right place to start.</p>
+									<p>In order to analyze the content of Wikipedia, one needs to find a suitable way to represent it. Given our interest in understanding the connections between different topics, a graph seemed like the natural choice. In this way, articles would be the nodes and the links to other pages would be the edges. Finally, we would be able to take advantage of several algorithms and techniques from graph theory and machine learning in order to derive interesting results.</p>
+
+									<hr class="major" />
+
+									<h2>Building the graph</h2>
+									<p>Wikipedia provides access to the content of its pages, as well as metadata through the <a href="https://dumps.wikimedia.org/">Wiki Dumps</a>. Snapshots of the entire Wikipedia are available in several formats, including XML and SQL. We opted for the SQL files containing the collection of all pages and the links contained within them, as well as the list of all page ids and their corresponding titles. In total, around 100GB of data were required to gather all the necessary information for constructing the graph representation of Wikipedia, where each node corresponds to a page and each edge to a link between two pages.</p>
+									<p>The data required extensive processing to guarantee that each page represents a <i>proper article</i>, meaning a page that is neither a <i>disambiguation</i>, nor a <i>redirect</i>. This ensures that the graph contains relevant articles containing interesting information. Pages not belonging to the <i>article namespace</i> are also filtered out. Finally, article ids from multiple files are matched to enforce consistency in our final representation which is made up of two text files: one containing the page ids and titles and another containig the page ids and links. For more details about the data processing stage, check out the repository available on <a href="https://github.com/MateiCosa/BAINSA-Knowledge-Graph">GitHub</a>.</p>
+									<p>Finally, we were left with 5.8 million nodes and 140 million edges. To create this structure in our program, we designed a custom Python class that leverages the sparsity of the graph to efficiently store and pull out information. The <a href="https://docs.python.org/3/library/linecache.html">linecache</a> module allowed us to optimize the process of reading lines from our text files. Such operations allow us to obtain the inward and outward neighbours of a given node, which is essential for navigating the graph.</p>
+
+									<hr class="major" />
+
+									<h2>Searching with Dijkstra's algorithm</h2>
+									<p><a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra's algorithm</a> is a famous algorithm for finding the shortest paths in a weighted graph. In our case, in the initial stage we assumed the weights were all equal. This can be, however, changed in the future to incorporate inforation about the relationship between pages, such as a measure of similarity. </p>
+									<p>By this point we could already explore the structure of our graph and stumble upon relatively surprising findings. For instance, pages that seemingly have very little in common are only a few links apart. This is in fact backed by the <a href="https://en.wikipedia.org/wiki/Six_degrees_of_separation">six degrees of separation</a> concept, which claims that all humans are six or less connections away from each other. A similar statistical arguement can be made for our network as well. From our experiments, it appears that most pages are 2 or 3 links apart, while the pages that were furthest apart required 4 links to reach.</p>
+									<p>Have a look at an example from our graph in which we wanted to find a path from <i>Mathematics</i> to <i>Lionel Messi</i>. Perhaps surprisingly, such a path only contains three edges.</p>
+
+									<span class="image main"><img src="/images/bending_6.png" alt="" /></span>
+
+									<hr class="major" />
+
+									<h2>Empirical study: a personal knowledge graph</h2>
+									<p>Having gathered all the necessary data and tools required to conduct our analysis, we set out to define an appropriate context. Our idea was to imagine every person's knowledge as a subgraph of the Wikipedia graph. This is both interesting and computationally less demanding then working with the entire network. In practice, we sampled 10000 pages from four main categories: <i>Mathematics</i>, <i>Philosophy</i>, <i>Sport</i>, and <i>Music</i>.</p>
+									<p>Starting from this setting, we asked ourselves whether it is possible to find a suitable representation of each node which would allow us to assess the similarity between pages without accessing their content. In other words, could we use our graph to identify similar pages by relying strictly on the topology?</p>
+									<p>Since interpreting <i>similarity scores</i> is often difficult (e.g., <i>Mathematics</i> and <i>Physics</i> shoulf have a score of 0.5, 0.6, 0.9?), we decided to solve a classification problem. In this formulation, we set out to assign to each page one of the four categories which yields the highest similarity score. The advantage of this approach is that results are more intrpretable and it is also possible to label pages by hand in order to train and validate different models. In fact, we used a set of 530 hand-labeled pages (where each label represents one category) throughout our study.</p>
+
+									<hr class="major" />
+
+									<h2>A heuristic approach</h2>
+									<p>Our first idea was to rely on the lentgh of the shortest paths from each page to the pages corresponding to the categories. Intuitively, pages that are one link away should have more in common than those that are four connections apart. Therefore, for every page we associated a <i>node embedding</i>, i.e. a four-dimensional vector containig the distance from the page to the four categories.</p>
+									
+									<span class="image main"><img src="/images/bending_7.png" alt="" /></span>
+
+									<p>There several caveats with this approach. Firstly, there could be situations in which, by coincidence, pages that are logically very different appear close to each other. Alternatively, there may be cases where the page of the category lack a direct connection with the an article that is closely related. Another problem is the abundance of pages that have similar distances with respect to the category pages. In short, there is not enough variability to properly compute a reasonable similarity measure.</p>
+									<p>The solution we proposed was influenced by a <i>wisdom of the crowds</i> type of approach. Even if some distances may be not reflect the actual similarity, we can assume that on average in a local neighbourhood of a node embeddings should paint a reasonably accurate picture. Therefore, we could incorporate local information into each embedding by updating its value to receive some data from the neighbours. This is equivalent to taking a linear combination of the current value and the average of the neighbouring embeddings.</p>
+
+									<span class="image main"><img src="/images/bending_8.png" alt="" /></span>
+
+									<p>This algorithm naturally has two hyperparameters: <i>lambda</i> (the coefficient in the linear combination) and <i>n</i> (the number of total updating rounds). To tune these two parameters, we ran a grid search and chose the values maximizing the classification accuracy on our labeled sample. The assignment of the label was done by picking the category with the highest <i>cosine similarity</i> value with respect to the given page. Finally, overal accuracy was around <b>86%</b>.</p>
+
+									<hr class="major" />
+
+									<h2>Graph neural networks for inductive representation learning</h2>
+									<p>We now move beyond the initial heuristic approach in an attempt to improve our classification accuracy and obtain better embeddings. Our model of choice was GraphSage: Hamilton, et al. “Inductive representation learning on large graphs.” (2017). These graph neural network architecture lies at the core of large-scale reccomender systems such as those used by Pinterest and UberEats. Its strength consists in the ability to generalize well to new nodes in dynamic networks or be trained in a semi-supervised setting, like the one we are in. With only 530 labeled nodes, we hope to learn a model for generating embeddings for our entire graph.</p>
+
+									<span class="image main"><img src="/images/bending_9.png" alt="" /></span>
+
+									<p>At a basic level, GraphSage includes two fundamental elements: <i>sampling</i> and <i>aggregation</i>. Sampling can be done in several ways, including random walks, neighbourhoods, etc., and is similar to the concept of a mini-batch in traditional deep learning. The main goal of sampling is to collect local information that will later be used in the aggregation step. This second step combines the local information and updates the embeddings through the use of <i>aggregator functions</i>. An aggregator function can be a simple mean operation or a more complex non-linear function that the model learns. This is what gives GraphSage its ability to generalize well.</p>
+									<p>After training the model with both mean and LSTM aggregation, we were able to reach an accuracy of <b>89%</b> on the classification task. This improvement may seem marginal with respect to the heuristic approach, but the true benefit of deep learning is hidden in the potential to produce good embeddings for new nodes. Adding a node to the network would require re-running the updating procedure, which is computationally expensive with the heuristic approach. GraphSage, on the other hand, would immediately output a new embedding after having learnt the aggregator function. Overall, GraphSage is a very powerful model and its utility is immense when dealing with large, potentially growing networks.</p>
+
+									<hr class="major" />
+
+									<h2>Conclusion</h2>
+									<p>Building knowledge graph of Wikipedia proved to be a highly complicated task which required extensive data processing, optimization, and planning. Coming up with models to understand how similar different pages are was an excercise of creativity and understanding state-of-the-art techniques. In the end, beyond the results obtained, the knowledge accquired in the process was the most important reward. It was precisely this knowledge that we sought from the beginning without realising: the process we went through to uncover the structure of human knowledge was a proxy for developing our own.</p>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="/index.html">Home</a></li>
+										<li><a href="/pages/blog.html">Blog</a></li>
+										<li><a href="/pages/projects.html">Projects</a></li>
+										<li><a href="/#about">About</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							<section>
+								<header class="major">
+									<h2>Get in touch</h2>
+								</header>
+								<p>Interested in a project collaboration, looking for a passionate and hard-working intern or simply wish to share some interesting information? Feel free to contact me at:</p>
+								<ul class="contact">
+									<li class="icon solid fa-envelope"><a href="mailto:mateigabriel.cosa@studbocconi.it">mateigabriel.cosa@studbocconi.it</a></li>
+								</ul>
+							</section>
+
+						<!-- Footer -->
+							<footer id="footer">
+								<p class="copyright">&copy; Matei Gabriel Cosa. <br> Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+							</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

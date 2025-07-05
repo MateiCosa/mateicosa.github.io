@@ -6,8 +6,47 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+		
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" href="/favicon.ico">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	</head>
 	<body class="is-preload">
+
+		<!-- Theme Toggle Button -->
+		<button id="theme-toggle" style="position: fixed; top: 1em; right: 1em; z-index: 10001; background: #23272a; color: #fff; border: none; border-radius: 2em; padding: 0.5em 1.2em; font-size: 1.5em; cursor: pointer; width: 2.5em; height: 2.5em; display: flex; align-items: center; justify-content: center;">🌙</button>
+		<script>
+		(function() {
+		  const btn = document.getElementById('theme-toggle');
+		  const html = document.documentElement;
+		  const darkEmoji = '🌙';
+		  const lightEmoji = '☀️';
+		  // Check localStorage
+		  if (localStorage.getItem('theme') === 'dark') {
+			html.classList.add('dark-mode');
+			btn.textContent = lightEmoji;
+		  } else if (localStorage.getItem('theme') === 'light') {
+			html.classList.remove('dark-mode');
+			btn.textContent = darkEmoji;
+		  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			html.classList.add('dark-mode');
+			btn.textContent = lightEmoji;
+		  }
+		  btn.onclick = function() {
+			if (html.classList.contains('dark-mode')) {
+			  html.classList.remove('dark-mode');
+			  localStorage.setItem('theme', 'light');
+			  btn.textContent = darkEmoji;
+			} else {
+			  html.classList.add('dark-mode');
+			  localStorage.setItem('theme', 'dark');
+			  btn.textContent = lightEmoji;
+			}
+		  };
+		})();
+		</script>
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -31,16 +70,18 @@
 										<header>
 											<h1 style="font-size: 3em; line-height: 1; white-space: nowrap;">Matei Gabriel Cosa<br />
 											</h1>
-											<p>Data-driven and research-oriented Computer Science & Economics student</p>
+											<p>
+												<i>"Not all those who wander are lost."</i> <br> - J.R.R. Tolkien
+											</pR>
 										</header>
-										<p>Deeply passionate about AI & Data Science, I wish to expand my knowledge and explore complex data in order to extract meaningful insights. My current research interests include Deep Learning, Network Science, and Online Machine Learning. </p>
+										<p> 👨🏼‍💻 Software Dev Engineer Intern @ Amazon <br> ✨ Published Author @ ICML 2025 <br> 🎓 AI MSc @ Bocconi <br> 💡 Research Interests: Learning-Augmented Algorithms, Applications of LLMs, Network Science <br> 🙏🏻 Academic Mentors: <a href="https://andcelli.github.io/">Andrea Celli</a>, <a href="https://danieledurante.github.io/web/">Daniele Durante</a>, <a href="https://elias.ba30.eu/">Marek Elias</a>, <a href="https://faculty.unibocconi.eu/omirospapaspiliopoulos/">Omiros Papaspiliopoulos</a>, <a href="https://cs.unibocconi.eu/people/luca-saglietti">Luca Saglietti</a></p>
 										<ul class="icons" style="font-size: 2em;">
 											<li><a href="https://github.com/MateiCosa" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 											<li><a href="https://www.linkedin.com/in/mateicosa/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 											<li><a href="mailto: mateigabriel.cosa@studbocconi.it" class="icon fa-envelope"><span class="label"></span></a></li>
 										</ul>
 										<ul class="actions">
-											<li><a href="/CV_Aug_2023.pdf" class="button big">Explore my CV</a></li>
+											<li><a href="#about" class="button big">🚀 Explore my journey</a></li>
 										</ul>
 									</div>
 									<span class="image object">
@@ -53,144 +94,133 @@
 									<header class="major">
 										<h2>
 											<a id="about"></a>
-											About me
+											About Me
 										</h2>
 									</header>
-									<div class="features">
-										<article>
-											<a href="https://www.unibocconi.eu/wps/wcm/connect/bocconi/sitopubblico_en/navigation+tree/home/programs/bachelor+of+science/economics+management+and+computer+science" class="icon solid fa-university"> </a> 
+									<header class="major">
+										<h3>
+											<a id="about-details"></a>
+											Industry, Research & Extra-Curriculars
+										</h3>
+									</header>
+									<div class="features-vertical">
+										<article class="about-entry">
+											<button class="about-logo-link" type="button"><img src="images/amazon-logo.png" alt="Amazon Logo" class="about-logo-img" /></button>
 											<div class="content">
-												<h3>Final-year Computer Science & Economics student @Bocconi University</h3>
-												<!-- <p><a href = "https://www.unibocconi.eu/wps/wcm/connect/bocconi/sitopubblico_en/navigation+tree/home/programs/bachelor+of+science/economics+management+and+computer+science"> BEMACS </a> is an innovative 3-year Bachelor Program that blends together computational, mathemtical, and statistical techniques with economic, financial, and business knowledge in order to guide its students towards pursuing a career in <b>Data Science & AI</b>.</p> -->
+												<h3>Software Development Engineer Intern @ Amazon</h3>
 											</div>
 										</article>
-										<article>
-											<a href="https://bayeslab.unibocconi.eu/people/students-and-postdocs" class="icon solid fa-chart-bar"></a>
+										<div class="about-extra" style="display:none;">🗓️ June - December 2025 <br> 🏠 Luxembourg, Luxembourg <br> 💼 Global Transportation Systems - Transportation Network Configuration <br>🤖 Working on agents, MCP, and applications of LLMs to improve developer efficiency <br> 🚚 Contributing to Amazon's services for configuring and optimizing its global transportaion network <br> 💻 AWS, Kotlin, Python <br> Manager: <a href="https://www.linkedin.com/in/sean-swezey-5127a920/">Sean Swezey</a></div>
+										<article class="about-entry">
+											<button class="about-logo-link" type="button"><img src="images/bocconi-logo.png" alt="Bocconi Logo" class="about-logo-img" /></button>
 											<div class="content">
-												<h3>Research Intern @Bocconi Institute for Data Science and Analytics (BIDSA)</h3>
-												<!-- <p>I am currently working in the <a href = https://bayeslab.unibocconi.eu/people/students-and-postdocs> Bayesian Learning Lab</a> of BIDSA under the supervision of <b>prof. Omiros Papaspiliopoulos</b> and <b>prof. Daniele Durante</b>. My work is focused on <b>Network Science</b>, as well as <b>Unsupervised Learning</b>.</p> -->
+												<h3>Research Assistant - Machine Learning @ Bocconi</h3>
 											</div>
 										</article>
-										<article>
-											<a href="https://bainsa.xyz/research/" class="icon solid fa-brain"></a>
+										<div class="about-extra" style="display:none;">🗓️ June 2024 - May 2025 <br> 🏠 Milan, Italy <br> 💼 <a href="https://cs.unibocconi.eu/">Computing Sciences Department</a>, Bocconi University <br> 🔎 Theory of Machine Learning, Bandits & Online Optimization, Learning-Augmented Algorithms<br> 📰 <a href="https://arxiv.org/abs/2506.05479">Learning-Augmented Algorithms for MTS with Bandit Access to Multiple Predictors</a> @ <a href="https://icml.cc/Conferences/2025">ICML 2025</a> <br> Supervisor: <a href="https://elias.ba30.eu/"> Marek Elias</a></div>
+										<article class="about-entry">
+											<button class="about-logo-link" type="button"><img src="images/bocconi-logo.png" alt="Bocconi Logo" class="about-logo-img" /></button>
 											<div class="content">
-												<h3>Research Project Lead @Bocconi AI & Neuroscience Student Association (BAINSA)</h3>
-												<!-- <p>I worked on the construction and analysis of a <b>Knowledge Graph of English Wikipedia</b> under the guidance of <b>prof. Luca Saglietti</b>. By leveraging a combination of heuristics and <b>Graph Neural Networks</b>, we were able to infer the similarity between different pages without accessing their content. The project was awarded first place by a jury of <a href = "https://bendingspoons.com/">Bending Spoons</a> AI Researchers & Data Scientists during BAINSA's Annual Research Awards. Repository avaiblabe <a href = "https://github.com/MateiCosa/BAINSA-Knowledge-Graph"> here</a>.</p> -->
+												<h3>Research Assistant - Data Science @ Bocconi</h3>
 											</div>
 										</article>
-										<article>
-											<a href="Certificate Internship.pdf" class="icon solid fa-database"></a>
+										<div class="about-extra" style="display:none;">🗓️ January - May 2025 <br> 🏠 Milan, Italy <br> 💼 <a href="https://danieledurante.github.io/web/nemesis.html">NEMESIS ERC Grant Team</a>, Bocconi University <br> 🔎 Network Science, Quantitative Criminology, LLM Applications <br> Supervisors: <a href="https://danieledurante.github.io/web/"> Daniele Durante</a>, <a href="https://faculty.unibocconi.eu/omirospapaspiliopoulos/"> Omiros Papaspiliopoulos</a></div>
+										<article class="about-entry">
+											<button class="about-logo-link" type="button"><img src="images/bainsa-logo.png" alt="Bocconi Logo" class="about-logo-img" /></button>
 											<div class="content">
-												<h3>ERP Development & Database Systems Summer Intern @Orange</h3>
-												<!-- <p>I worked on developing technical solutions for Oracle E-Business Suite with the goal of producing tax reports using <b>SQL & PL/SQL</b>. Using my knowledge of financial accounting, as well as understaning of caching and query optimization, I was able to reduce the execution time of some reports <b>by 30% to 50%</b>.</p> -->
+												<h3>Vice President @ Bocconi AI & Neuroscience Student Association (BAINSA)</h3>
 											</div>
 										</article>
+										<div class="about-extra" style="display:none;">🗓️ September 2023 - Septmember 2024 <br> 🏠 Milan, Italy <br> 🦾 Supervised <a href="https://bainsa.xyz/category/research-division/mlhist/">research activities</a> <br> 🔗 Managed partnerships with <a href="https://bendingspoons.com/">Bending Spoons</a>, <a href="https://www.vedrai.com/en">Vedrai</a>, <a href="https://instituteuropia.eu/">EuropIA Institute</a> & more <br> 🎯 Grew research division through highly competitve selection (acceptance rate < 20%)</div>
+										<article class="about-entry">
+											<button class="about-logo-link" type="button"><img src="images/bocconi-logo.png" alt="Bocconi Logo" class="about-logo-img" /></button>
+											<div class="content">
+												<h3>Research Intern @ Bocconi Institute for Data Science and Analytics (BIDSA)</h3>
+											</div>
+										</article>
+										<div class="about-extra" style="display:none;">🗓️ January 2023 - December 2024 <br> 🏠 Milan, Italy <br>📌 One of only five Undergraduate Research Interns in the <a href="https://bayeslab.unibocconi.eu/people/students-and-postdocs?_gl=1*xcu1r9*_up*MQ..*_ga*MzkwNzc3NTYzLjE3NTA3MDkyNTc.*_ga_Y2D594B3DP*czE3NTA3MDkyNTckbzEkZzAkdDE3NTA3MDkyNTckajYwJGwwJGgw">Bayesian Learning Lab</a> <br> 🔎 Network Science (under Omiros Papaspiliopoulos & Daniele Durante): Proposed novel techniques for construction and analysis of international drug trafficking networks <br> 🔎 Online Optimization (under Andrea Celli & Marek Elias): investigated the performance of online learning algorithms for problems such as the "secretary problem", combinatorial bandits, and metrical task systems. <br> 📚 Taught a Data Science Lab with over 70 students during the Bocconi Summer School 2023 & 2024.
+
+										</div>
+										<article class="about-entry">
+											<button class="about-logo-link" type="button"><img src="images/orange-logo.png" alt="Orange Logo" class="about-logo-img" /></button>
+											<div class="content">
+												<h3>ERP Development & Database Systems Summer Intern @ Orange</h3>
+											</div>
+										</article>
+										<div class="about-extra" style="display:none;">🗓️ June - August 2022 <br> 🏠 Bucharest, Romania <br> 💼 Data, AI & Enterprise Solutions<br>💻 SQL, PL/SQL, Oracle Database <br> 🎯 Implemented data pipelines to gather, organise, and process terabytes of financial and user data. Created reports and
+											optimized SQL queries that led to a decrease in execution time of 30% to 50% <br> Manager: <a href="https://www.linkedin.com/in/dragos-calin-6a35a510/">Dragos Calin</a></div>
 									</div>
+									<header class="major">
+										<h3>
+											<a id="about-details"></a>
+											Education
+										</h3>
+									</header>
+									<div class="features-vertical">
+										<article class="about-entry">
+											<button class="about-logo-link" type="button"><img src="images/bocconi-logo.png" alt="Bocconi Logo" class="about-logo-img" /></button>
+											<div class="content">
+												<h3>MSc in Artificial Intelligence @ Bocconi</h3>
+											</div>
+										</article>
+										<div class="about-extra" style="display:none;">🗓️ 2024 - 2026 <br> 🏠 Milan, Italy <br> 🏆 Graduate Merit Award (full scholarship ~ 36,000€) <br> 🎓 GPA: 29.83/30 <br> 📚 Relevant Coursework: Deep Learning & Reinforcement Learning, NLP, Computer Vision, Information Theory, Optimization, Software Engineering </div>
+										<article class="about-entry">
+											<button class="about-logo-link" type="button"><img src="images/bocconi-logo.png" alt="Bocconi Logo" class="about-logo-img" /></button>
+											<div class="content">
+												<h3>BSc in Economics, Management & Computer Science @ Bocconi</h3>
+											</div>
+										</article>
+										<div class="about-extra" style="display:none;">🗓️ 2021 - 2024 <br> 🏠 Milan, Italy <br> 🏆 2 x Excellence Award (~ 30,000€) - top 15 / 1000 students based on GPA <br> 🎓 GPA: 30.27/30 (110 Cum Laude) <br> 📚 Relevant Coursework: Advanced Statistical Methods, Machine Learning, Computer Programming, Real & Fourier Analysis, Linear Algebra, Data Structures & Algorithms, Theoretical Computer Science, Big Data & Databases, Econometrics, Game Theory & Mechanism Design.
+											</div>
+									</div>
+									<header class="major">
+										<h3>Publications</h3>
+									</header>
+									<div class="features-vertical">
+										<article class="about-entry">
+											<button class="about-logo-link" type="button"><img src="images/ICML-logo.png" alt="Bocconi Logo" class="about-logo-img" /></button>
+											<div class="content">
+												<h3>Learning-Augmented Algorithms for MTS with Bandit Access to Multiple Predictors</h3>
+												<h4>with <a href="https://elias.ba30.eu/"> Marek Elias @ <a href="https://icml.cc/Conferences/2025">ICML 2025</a> </h4>
+											</div>
+										</article>
+										<div class="about-extra" style="display:none;">🗓️ May, 2025 <br> <i>Proceedings of the Forty-Second International Machine Learning Conference</i>, 2025.<br> 📝 <a href="https://arxiv.org/abs/2506.05479">Preprint</a> <br> 🎤 <a href="https://icml.cc/virtual/2025/poster/44771">Poster, Slides & Presentation</a></div>
+									</div>
+									<header class="major">
+										<h3>Skills</h3>
+									</header>
+									<ul>
+										<li>👨🏼‍💻 Programming languages: Python (PyTorch, scikit-learn, pandas, networkx, etc.), Kotlin, C, SQL, R, Shell </li>
+										<li>🛠️ Tools: AWS (EC2, Lambda, S3, DynamoDB, etc.), Git, Jupyter</li>
+										<li>💻 Sofware development: CI/CD, Cloud, Agile</li>
+										<li>🤖 Gen AI: Agents, MCP</li>
+									</ul>
 								</section>
 
 							<!-- Section -->
 								<section>
 									<header class="major">
-										<h2>News</h2>
+										<h2>Updates 🎉🎉🎉</h2>
 									</header>
-									<div class="posts">
-										<article>
-											<a href="pages/summer_school.html" class="image"><img src="images/summ_2.jpeg" alt="" /></a>
-											<h3>My First Teaching Experience: <br> Bocconi Summer School 2023</h3>
-											<p>From student to instructor - a challenging and rewarding experience! Back in Milan for the summer, I had the chance to teach prospective students the basics of Data Science.</p>
-											<ul class="actions">
-												<li><a href="pages/summer_school.html" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="pages/bainsa_awards.html" class="image"><img src="images/bending_1.jpeg" alt="" /></a>
-											<h3>Research Awards @Bending Spoons</h3>
-											<p>AI research, cool people, and a Bending Spoons aperitivo... These are just some of the highlights of BAINSA's Annual Research Awards!</p>
-											<ul class="actions">
-												<li><a href="pages/bainsa_awards.html" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="pages/david_s.html" class="image"><img src="images/davids_2.jpeg" alt="" /></a>
-											<h3>Can We Trust Statistics & Algorithms? <br> A talk by prof. David Spiegelhalter OBE </h3></h3>
-											<p>From rather harmless spurious correlations, to potentially dangerous claims about vaccines during the COVID-19 pandemic, telling a story with data requires great responsibility.</p>
-											<ul class="actions">
-												<li><a href="pages/david_s.html" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="pages/cannes.html" class="image"><img src="images/cannes_1.jpeg" alt="" /></a>
-											<h3>AI Takes Over Cannes: <br> My experience at WAICF 2023</h3>
-											<p>A different kind of festival took place in Cannes. Leading figures in AI such as Yann LeCun, Thomas Wolf, or Aidan Gomez shared their views on the future of this field!</p>
-											<ul class="actions">
-												<li><a href="pages/cannes.html" class="button">More</a></li>
-											</ul>
-										</article>
-										
-									</div>
+									<ul>
+										<li>📦 June 2025: Started Software Dev Engineer internship @ Amazon (Luxembourg) </li>
+										<li>📰 May 2025: First (1st author) paper accepted at ICML 2025 </li>
+										<li>🎓 September 2024: Started MSc in Artificial Intelligence @ Bocconi University (full merit scholarship) </li>
+										<li>🎓 July 2024: Graduated BSc in Economics, Management & Computer Science @ Bocconi University (110 Cum Laude/110)</li>
+										<li>🏆 October 2022 & 2023: Received Excellence Award (top 15 GPA) for BSc studies</li>
+									</ul>
 								</section>
 
 						</div>
 					</div>
 
+				<section>
+					
+				</section>
+
 				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
-
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href="index.html">Home</a></li>
-										<li><a href="pages/blog.html">Blog</a></li>
-										<li><a href="pages/projects.html">Projects</a></li>
-										<li><a href="#about">About</a></li>
-									</ul>
-								</nav>
-
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>News</h2>
-									</header>
-									<div class="mini-posts">
-										<article>
-											<a href="pages/summer_school.html" class="image"><img src="images/summ_2.jpeg" alt="" /></a>
-											<p>My First Teaching Experience: <br> Bocconi Summer School 2023</p>
-										</article>
-										<article>
-											<a href="pages/bainsa_awards.html" class="image"><img src="images/bending_1.jpeg" alt="" /></a>
-											<p>Bending Spoons Award</p>
-										</article>
-										<article>
-											<a href="pages/david_s.html" class="image"><img src="images/davids_2.jpeg" alt="" /></a>
-											<p>Can We Trust Statistics & Algorithms? <br> A talk by prof. David Spiegelhalter OBE</p>
-										</article>
-									</div>
-									<ul class="actions">
-										<li><a href="pages/blog.html" class="button">More</a></li>
-									</ul>
-								</section>
-
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Get in touch</h2>
-									</header>
-									<p>Interested in a project collaboration, looking for a passionate and hard-working intern or simply wish to share some interesting information? Feel free to contact me at:</p>
-									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="mailto:mateigabriel.cosa@studbocconi.it">mateigabriel.cosa@studbocconi.it</a></li>
-									</ul>
-								</section>
-
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Matei Gabriel Cosa. <br> Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-								</footer>
-
-						</div>
+					<div id="sidebar-placeholder">
+						<!-- Sidebar will be loaded here -->
 					</div>
 
 			</div>
@@ -201,6 +231,18 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/sidebar-loader.js"></script>
+			<script>
+			document.querySelectorAll('.about-logo-link').forEach(function(btn) {
+			  btn.addEventListener('click', function(e) {
+				var entry = btn.closest('.about-entry');
+				var extra = entry.nextElementSibling;
+				if (extra && extra.classList.contains('about-extra')) {
+				  extra.style.display = (extra.style.display === 'none' || extra.style.display === '') ? 'block' : 'none';
+				}
+			  });
+			});
+			</script>
 
 	</body>
 </html>

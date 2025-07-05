@@ -17,6 +17,10 @@
 
 		<!-- Theme Toggle Button -->
 		<button id="theme-toggle" style="position: fixed; top: 1em; right: 1em; z-index: 10001; background: #23272a; color: #fff; border: none; border-radius: 2em; padding: 0.5em 1.2em; font-size: 1.5em; cursor: pointer; width: 2.5em; height: 2.5em; display: flex; align-items: center; justify-content: center;">🌙</button>
+		
+		<!-- Menu Toggle Button -->
+		<button id="menu-toggle" style="position: fixed; top: 1em; right: 4em; z-index: 10001; background: #23272a; color: #fff; border: none; border-radius: 2em; padding: 0.5em 1.2em; font-size: 1.5em; cursor: pointer; width: 2.5em; height: 2.5em; display: flex; align-items: center; justify-content: center;">☰</button>
+		
 		<script>
 		(function() {
 		  const btn = document.getElementById('theme-toggle');
@@ -232,6 +236,7 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/sidebar-loader.js"></script>
+			<script src="assets/js/menu-toggle.js"></script>
 			<script>
 			document.querySelectorAll('.about-logo-link').forEach(function(btn) {
 			  btn.addEventListener('click', function(e) {
